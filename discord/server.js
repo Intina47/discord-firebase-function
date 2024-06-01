@@ -12,7 +12,7 @@ const locationId = process.env.LOCATION_ID;
 const agentId = process.env.AGENT_ID;
 const languageCode = 'en';
 const discordToken = process.env.DISCORD_TOKEN;
-let PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 8080;
 
 bot.login(discordToken);
 
@@ -20,7 +20,7 @@ bot.on('ready', () => {
   console.log(`Logged in as ${bot.user.tag}!`);
 });
 
-const structProtoToJson = require('../botlib/proto_to_json.js').structProtoToJson;
+const structProtoToJson = require('./botlib/proto_to_json.js').structProtoToJson;
 const { SessionsClient } = require('@google-cloud/dialogflow-cx');
 
 const client = new SessionsClient({
@@ -111,8 +111,6 @@ process.on('unhandledRejection', (reason, promise) => {
 
 process.on('uncaughtException', error => {
   console.error('Uncaught Exception:', error);
-  // Optionally, exit the process
-  // process.exit(1);
 });
 
 module.exports = {
